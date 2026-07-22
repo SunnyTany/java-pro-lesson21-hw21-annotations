@@ -5,22 +5,26 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        // Demonstration of the methods
-        ArrayUtils utils = new ArrayUtils();
         int[] numbers = {3, 5, 1, 9, 2};
 
-        System.out.println("--- Демонстрація роботи методів ---");
+        System.out.println("--- Демонстрація роботи статичних методів ---");
         System.out.println("Оригінальний масив: " + Arrays.toString(numbers));
-        System.out.println("Максимум: " + utils.findMax(numbers));
-        System.out.println("Перевернутий масив: " + Arrays.toString(utils.reverseArray(numbers)));
+
+        // Виклик статичних методів без створення об'єкта
+        System.out.println("Максимум: " + ArrayUtils.findMax(numbers));
+
+        ArrayUtils.reverseArray(numbers);
+        System.out.println("Перевернутий масив (in-place): " + Arrays.toString(numbers));
         System.out.println();
 
-        // Reading annotations through reflection
         System.out.println("--- Зчитування анотацій через рефлексію ---");
         Class<ArrayUtils> arrayUtilsClass = ArrayUtils.class;
         Method[] methods = arrayUtilsClass.getDeclaredMethods();
 
         for (Method method : methods) {
+            // Ігноруємо приватний конструктор, аналізуємо тільки методи
+            if (method.getName().equals("main")) continue;
+
             System.out.println("Досліджуємо метод Java: " + method.getName());
 
             if (method.isAnnotationPresent(MethodInfo.class)) {
