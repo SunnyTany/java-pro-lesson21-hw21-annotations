@@ -7,11 +7,10 @@ public class Main {
     public static void main(String[] args) {
         int[] numbers = {3, 5, 1, 9, 2};
 
-        // Demonstration of the methods
+        // Demonstration of static methods
         System.out.println("--- Демонстрація роботи статичних методів ---");
         System.out.println("Оригінальний масив: " + Arrays.toString(numbers));
 
-        // Calling static methods without creating an object
         System.out.println("Максимум: " + ArrayUtils.findMax(numbers));
 
         ArrayUtils.reverseArray(numbers);
@@ -24,8 +23,8 @@ public class Main {
         Method[] methods = arrayUtilsClass.getDeclaredMethods();
 
         for (Method method : methods) {
-
-            if (method.getName().equals("main")) continue;
+            // Protection against synthetic methods (e.g., compiler-generated)
+            if (method.isSynthetic()) continue;
 
             System.out.println("Досліджуємо метод Java: " + method.getName());
 
